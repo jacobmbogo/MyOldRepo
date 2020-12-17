@@ -250,6 +250,8 @@ function unless(test, then) {
   const lenArray = mapForEach(strArray,item => item.length);
   console.log(lenArray);
 
+  console.log("Kenya");
+
 
   
 
