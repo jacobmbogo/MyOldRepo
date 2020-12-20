@@ -253,5 +253,38 @@ function unless(test, then) {
   console.log("Kenya");
 
 
+  let names = ["David","Mike","Cynthia","Clayton","Bryan","Raymond"];
+  names.sort();
+  console.log(names);
+
+  function compare(num1,num2){
+    return num1 - num2;
+  }
+
+  function digit(num){
+    console.log(num,num*num);
+  }
+
+  let digits = [3,1,2,100,4,200];
+  digits.sort(compare);
+  console.log(digits);
   
+  digits.forEach(digit);
+  let grades = [44,56,33,74];
+  let newGrades = grades.map(grade=>grade + 5);
+  console.log(newGrades);
+
+  let words = ["for","your","information"];
+  let acronym = words.map(word => word[0]);
+  console.log(acronym.join(""));
+
+ 
+  let list = []
+  for (i = 0; i < 20; i++){
+      list[i] = i+1;
+  }
+
+  let evens = list.filter(component => component % 2 == 0);
+  console.log("Even Numbers: " + evens)
+
 
