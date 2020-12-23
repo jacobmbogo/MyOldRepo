@@ -287,4 +287,3 @@ function unless(test, then) {
   let evens = list.filter(component => component % 2 == 0);
   console.log("Even Numbers: " + evens)
 
-
