@@ -287,3 +287,7 @@ function unless(test, then) {
   let evens = list.filter(component => component % 2 == 0);
   console.log("Even Numbers: " + evens)
 
+  let horseShoe = "🐴👟";
+  console.log(horseShoe.length);
+  console.log(horseShoe[0]);
+  console.log(horseShoe.charCodeAt(0));
