@@ -351,3 +351,16 @@ let animals = [
 ]
 
 console.log(animals.filter(animal => animal.species == "fish").map(animal=>animal.type = "sea mammal"));
+
+function every(array, validation){
+  for(let item of array){
+    return validation(item);
+  }
+}
+function every2(array, validation){
+  return !array.some(item => !validation(item));
+}
+console.log(every2([8,4,6], n => n % 2 == 0));
+console.log(every2([1,3,5], n => n > 10));
+console.log(every([], n => n < 10));
+
