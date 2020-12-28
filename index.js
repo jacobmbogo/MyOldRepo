@@ -314,6 +314,40 @@ let roseDragon = "🌻🐲";
 for (let char of roseDragon){
   console.log(char);
 }
+function countBy(items, groupName){
+  let counts = [];
+  for(let item of items){
+    let name = groupName(item);
+    let known = counts.findIndex(c => c == name);
+    if (known == -1){
+      counts.push({name, count: 1});
+    } else {
+      counts[known].count++;
+    }
+  }
+  return counts;
+}
+
+console.log(countBy([1,2,3,4,5], n => n > 2));
 
 
- 
+
+let arrayOne = [[1,2,3,4],["jack","steve","mary"],[true,false]];
+console.log(arrayOne.reduce((a,b) => a.concat((b))));
+
+function loop(start, test, update,body){
+ for (let value = start; test(value); value = update(value)){
+   body(value);
+ }
+}
+loop(3, n => n > 0, n => n - 1,console.log);
+
+let animals = [
+  {name:"Fluffykins", species:"rabbit"},
+  {name:"Caro",       species:"dog"},
+  {name:"Hamilton",   species:"fish"},
+  {name:"Ursula",     species:"cat"},
+  {name:"Jimmy",      species:"fish"}
+]
+
+console.log(animals.filter(animal => animal.species == "fish").map(animal=>animal.type = "sea mammal"));
