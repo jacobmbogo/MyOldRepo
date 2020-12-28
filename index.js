@@ -230,12 +230,7 @@ function unless(test, then) {
   const lessAge = persons.filter(person => person.age < 18);
   console.log(lessAge);
 
-  const arr = [5,7,1,8,4];
-  const sum = arr.reduce(function(accumulator, currentValue){
-    return accumulator + currentValue;
-  });
-
-  console.log(sum);
+ 
 
   const strArray = ["JavaScript","Python","PHP","Java","C"];
 
@@ -291,3 +286,16 @@ function unless(test, then) {
   console.log(horseShoe.length);
   console.log(horseShoe[0]);
   console.log(horseShoe.charCodeAt(0));
+
+  const arr = [5,7,1,8,4];
+  const sum = arr.reduce(function(total, currentValue){
+    return total + currentValue;
+  });
+
+  console.log(sum);
+
+
+  let people = [1,4,5,6,6];
+  peopleInTotal = people.reduce((currentNumber,totalNumber) => currentNumber + totalNumber);
+
+  console.log(peopleInTotal);
