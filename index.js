@@ -282,11 +282,7 @@ function unless(test, then) {
   let evens = list.filter(component => component % 2 == 0);
   console.log("Even Numbers: " + evens)
 
-  let horseShoe = "🐴👟";
-  console.log(horseShoe.length);
-  console.log(horseShoe[0]);
-  console.log(horseShoe.charCodeAt(0));
-
+  
   const arr = [5,7,1,8,4];
   const sum = arr.reduce(function(total, currentValue){
     return total + currentValue;
@@ -299,3 +295,25 @@ function unless(test, then) {
   peopleInTotal = people.reduce((currentNumber,totalNumber) => currentNumber + totalNumber);
 
   console.log(peopleInTotal);
+  var itDiv = ["Mike","Clayton","Terrill","Raymond","Cynthia","Danny","Jennifer"];
+  var dmpDept = itDiv.splice(3,5);
+  console.log(dmpDept);
+  console.log(itDiv);
+
+  let numberList = [1,3,5];
+  evenNumbers = numberList.some(even => even % 2 == 0);
+  console.log(evenNumbers);
+
+  let horseShoe = "🐴👟";
+  console.log(horseShoe.length);
+  console.log(horseShoe[0]);
+  console.log(horseShoe.charCodeAt(0));
+  console.log(horseShoe.codePointAt(0));
+
+let roseDragon = "🌻🐲";
+for (let char of roseDragon){
+  console.log(char);
+}
+
+
+ 
