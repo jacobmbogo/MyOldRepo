@@ -364,3 +364,156 @@ console.log(every2([8,4,6], n => n % 2 == 0));
 console.log(every2([1,3,5], n => n > 10));
 console.log(every([], n => n < 10));
 
+let activities = [
+  ["reading",1],
+  ["playing",4],
+  ["slaking",9],
+  ["patriotism",7]
+];
+
+console.table(activities);
+console.log(activities[1][0]);
+console.log(activities[3][1]);
+activities.push(["cooking",1]);
+
+console.table(activities);
+activities.pop();
+console.table(activities);
+
+Array.matrix = function(numrows, numcols, initial){
+  let arr = [];
+  for(let i = 0; i < numrows; i++){
+    let columns = [];
+    for(let j = 0; j < numcols; j++){
+      columns[j] = initial;
+    }
+    arr[i] = columns;
+  }
+  return arr;
+}
+
+let numbs = Array.matrix(5,5,0);
+console.log(numbs[1][1]);
+
+let namels = Array.matrix(3,3,"");
+namels[1][2] = "Joe";
+console.log(namels[1][2]);
+console.table(namels);
+console.table(numbs);
+
+
+function weekTemps(){
+  this.dataStore = [];
+  this.add = add;
+  this.average = average;
+}
+
+function add(temp){
+  this.dataStore.push(temp);
+}
+
+function average(){
+  let total = 0;
+  for (let i = 0; i < this.dataStore.length; i++){
+    total += this.dataStore[i];
+  }
+  return total / this.dataStore.length;
+}
+
+let thisWeek = new weekTemps();
+thisWeek.add(52);
+thisWeek.add(55);
+thisWeek.add(61);
+thisWeek.add(65);
+thisWeek.add(55);
+thisWeek.add(50);
+thisWeek.add(52);
+thisWeek.add(49);
+
+console.log(thisWeek.average().toFixed(2));
+
+
+let marks = [];
+
+function append(grade){
+  return marks.push(grade);
+}
+
+function mean(){
+  return (marks.reduce((a,b) => a + b))/marks.length;
+}
+
+append(21);
+append(23);
+append(45);
+console.log(marks);
+
+console.log(mean().toFixed(2));
+
+function newGrade(){
+  this.alama = [];
+  this.ongeza = ongeza;
+  this.meanAverage = meanAverage;
+}
+
+function ongeza(marksi){
+  this.alama.push(marksi);
+}
+
+function meanAverage(){
+  return (this.alama.reduce((a,b) => a + b))/this.alama.length;
+}
+
+let finalList = new newGrade();
+finalList.ongeza(21);
+finalList.ongeza(23);
+finalList.ongeza(45);
+
+console.log(finalList.meanAverage().toFixed(2));
+console.log(finalList.alama);
+
+
+let setOfWords = [];
+function addWord(word){
+  return setOfWords.push(word);
+}
+
+function forward(){
+  return setOfWords.reduce((a,b) => a + b);
+}
+
+function backword(){
+  return setOfWords.reverse();
+}
+
+addWord("cunning");
+addWord("misbehave");
+console.log(setOfWords);
+console.log(backword());
+
+
+function individualLetters(){
+  this.letter = [];
+  this.addit = addit;
+  this.singleWord = singleWord;
+}
+
+function addit(letr){
+  this.letter.push(letr);
+}
+
+function singleWord(){
+  for(let i = 0; i < this.letter.length; i++){
+    return this.letter.reduce((a,b) => a + b);
+  }
+}
+
+let newLetter = new individualLetters();
+
+newLetter.addit("a");
+newLetter.addit("b");
+newLetter.addit("h");
+newLetter.addit("o");
+newLetter.addit("r");
+
+console.log(newLetter.singleWord());
