@@ -1,9 +1,6 @@
-# NewStrange
-tired
-redo assignment
+#This Repo
 
-# Woken up feeling ready to learn new things.
-I just want to get the perfect course to learn JavaScript and also to make use of my time wisely. I thought i had time.
-
-## Local Development
-1. Open index.html in your browser
+This repository contains learned materials that is per outlined as in Eloquent JavaScript.
+They include:
+Higher Order functions
+Secret life of Objects
