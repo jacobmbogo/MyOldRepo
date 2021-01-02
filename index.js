@@ -544,7 +544,7 @@ function normalize(){
 }
 normalize.call({coords: [0,2,3], length: 5});
 
-//Prototypes
+//Prototypes - A prototype is another object that is used as a fallback source of properties
 //When an object gets a request for a propery that it does not have, its prototype will be searched for the property, then the prototype's prototype, and so on.
 let empty = {};
 console.log(empty.toString);
@@ -558,3 +558,79 @@ console.log(Object.getPrototypeOf(Object.prototype));
 //functions derive from Function.prototype and Arrays derive from Array.prototype
 console.log(Object.getPrototypeOf(Math.max) == Function.prototype);
 console.log(Object.getPrototypeOf([]) == Array.prototype);
+
+//You can use Object.create to create an object with a specific prototype.
+//The "proto" rabbit acts as a container for the properties that are shared by all rabbits.
+
+/*
+let protoRabbit = {
+  speak(line) {
+    console.log(`The ${this.type} rabbit says "${line}"`);
+  }
+};
+let killerRabbit = Object.create(protoRabbit);
+killerRabbit.type = "killer";
+killerRabbit.speak("SKREEEE!");
+
+//Let's create another instance of a rabbit, like humbleRabbit;
+let humbleRabbit = Object.create(protoRabbit);
+humbleRabbit.type = "humble";
+humbleRabbit.speak("MHHH");
+
+//Classes - a class defines the shape of a type of object - what methods and properties it has. Such an object is called an "instance" of the class.
+
+//Prototypes are useful for defining properties for which all instances of a class share the same value, such as methods.
+
+//Properties that differ per instance,such as our rabbits' type property, need to be stored directly in the objects themselves.
+
+//So to create an instance of a given class, you have to make an object that derives from the proper prototype, but you also have to make sure it, itself, has the properties that instances of this class are supposed to have.
+
+//This is what a 'constructor' function does.
+
+function makeRabbit(type) {
+  let rabbit = Object.create(protoRabbit);
+  rabbit.type = type;
+  return rabbit;
+}
+
+
+//*If you put the keyword 'new' infront of a function call, the function is treated as a constructor. This means that an object with the right prototype is automatically created, bound to "this" in the function, and returned at the end of the function.
+
+function Rabbit(type){
+  this.type = type;
+}
+
+Rabbit.prototype.speak = function(line){
+  console.log(`The ${this.type} rabbit says "${line}"`);
+};
+
+let weirdRabbit = new Rabbit("weird");
+
+
+//Constructors (all functions, in fact) automatically get a propetry named prototype, which by default holds a plain, empty object that derives from Object.prototype. 
+
+//By convention, the names of constructors are capitalized so that they can easily be distinguished from other functions.
+
+//It’s important to understand the distinction between the way a prototype is associated with a constructor (through its prototype property) and the way objects have a prototype (which can be found with Object.getPrototypeOf).
+
+//The actual prototype of a constructor is Function.prototype since constructorsare functions. Its prototype property holds the prototype used for instances created through it.
+
+console.log(Object.getPrototypeOf(Rabbit) == Function.prototype);
+console.log(Object.getPrototypeOf(weirdRabbit) == Rabbit.prototype);
+
+//Class Notation
+class Rabbit {
+  constructor(type){
+    this.type = type;
+  }
+  speak(line){
+    console.log(`The ${this.type} rabbit says "${line}"`)
+  }
+}
+
+let killerRabbit = new Rabbit("killer");
+let blackRabbit = new Rabbit("black");
+
+The "class keyword starts a class declaration, which allows us to define a constructor and a set of methods all in a single place"
+*/
+
