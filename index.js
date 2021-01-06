@@ -572,20 +572,20 @@ let killerRabbit = Object.create(protoRabbit);
 killerRabbit.type = "killer";
 killerRabbit.speak("SKREEEE!");
 
-//Let's create another instance of a rabbit, like humbleRabbit;
+//*Let's create another instance of a rabbit, like humbleRabbit;
 let humbleRabbit = Object.create(protoRabbit);
 humbleRabbit.type = "humble";
 humbleRabbit.speak("MHHH");
 
-//Classes - a class defines the shape of a type of object - what methods and properties it has. Such an object is called an "instance" of the class.
+//*Classes - a class defines the shape of a type of object - fia what methods and properties it has. Such an object is called an "instance" of the class.
 
-//Prototypes are useful for defining properties for which all instances of a class share the same value, such as methods.
+//*Prototypes are useful for defining properties for which all instances of a class share the same value, such as methods.
 
-//Properties that differ per instance,such as our rabbits' type property, need to be stored directly in the objects themselves.
+//*Properties that differ per instance,such as our rabbits' type property, need to be stored directly in the objects themselves.
 
-//So to create an instance of a given class, you have to make an object that derives from the proper prototype, but you also have to make sure it, itself, has the properties that instances of this class are supposed to have.
+//*So to create an instance of a given class, you have to make an object that derives from the proper prototype, but you also have to make sure it, itself, has the properties that instances of this class are supposed to have.
 
-//This is what a 'constructor' function does.
+//*This is what a 'constructor' function does.
 
 function makeRabbit(type) {
   let rabbit = Object.create(protoRabbit);
@@ -607,18 +607,18 @@ Rabbit.prototype.speak = function(line){
 let weirdRabbit = new Rabbit("weird");
 
 
-//Constructors (all functions, in fact) automatically get a propetry named prototype, which by default holds a plain, empty object that derives from Object.prototype. 
+//*Constructors (all functions, in fact) automatically get a propetry named prototype, which by default holds a plain, empty object that derives from Object.prototype. 
 
-//By convention, the names of constructors are capitalized so that they can easily be distinguished from other functions.
+//*By convention, the names of constructors are capitalized so that they can easily be distinguished from other functions.
 
-//It’s important to understand the distinction between the way a prototype is associated with a constructor (through its prototype property) and the way objects have a prototype (which can be found with Object.getPrototypeOf).
+//*It’s important to understand the distinction between the way a prototype is associated with a constructor (through its prototype property) and the way objects have a prototype (which can be found with Object.getPrototypeOf).
 
-//The actual prototype of a constructor is Function.prototype since constructorsare functions. Its prototype property holds the prototype used for instances created through it.
+//*The actual prototype of a constructor is Function.prototype since constructorsare functions. Its prototype property holds the prototype used for instances created through it.
 
 console.log(Object.getPrototypeOf(Rabbit) == Function.prototype);
 console.log(Object.getPrototypeOf(weirdRabbit) == Rabbit.prototype);
 
-//Class Notation
+//*Class Notation
 class Rabbit {
   constructor(type){
     this.type = type;
@@ -634,3 +634,55 @@ let blackRabbit = new Rabbit("black");
 The "class keyword starts a class declaration, which allows us to define a constructor and a set of methods all in a single place"
 */
 
+
+
+
+class Rabbit {
+  constructor (type){
+    this.type = type;
+  }
+  speak(line) {
+  console.log(`The ${this.type} rabbit says "${line}"`)
+  }
+}
+
+let muteRabbit = new Rabbit("mute");
+muteRabbit.speak("de");
+
+let object = new class { getWord() { return "hello";} };
+console.log(object.getWord());
+
+
+
+let findCar = new class{ findcar(){
+return "Ethiopia";
+}
+};
+
+console.log(findCar.findcar());
+
+
+Rabbit.prototype.teeth = "small";
+console.log(muteRabbit.teeth);
+
+muteRabbit.teeth = "long, sharp and bloody";
+console.log(muteRabbit.teeth);
+
+console.log(Array.prototype.toString == Object.prototype.toString);
+console.log([1, 2].toString());
+
+console.log((Object.prototype.toString.call([1,2])));
+
+
+let userNumbers = [3,5,5];
+console.log(userNumbers.map(n => n + 5));
+
+let agesOf = {
+  Boris: 39,
+  Lianga: 22,
+  Julia: 62
+};
+
+console.log(`Julia is ${agesOf["Julia"]}`);
+console.log("Is Jack's age known?", "Jack" in ages);
+console.log("Is toString's age known?", "toString" in ages);
