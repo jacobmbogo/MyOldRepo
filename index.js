@@ -686,3 +686,56 @@ let agesOf = {
 console.log(`Julia is ${agesOf["Julia"]}`);
 console.log("Is Jack's age known?", "Jack" in ages);
 console.log("Is toString's age known?", "toString" in ages);
+console.log("toString" in Object.create(null));
+
+//*Maps: a data structure that associates values(the keys) with other values.
+let agesNow = new Map();
+agesNow.set("Tony", 39);
+agesNow.set("Ogot", 22);
+agesNow.set("Muma", 69);
+
+console.log(`Muma is ${agesNow.get("Muma")}`);
+console.log("Is Jack's  age known?", agesNow.has("Jack"));
+console.log(agesNow.has("toString"));
+
+
+console.log(Object.keys({
+  Boris: 39,
+  Lianga: 22,
+  Julia: 62
+}));
+
+console.log({x: 1}.hasOwnProperty("x"));
+console.log({x: 1}.hasOwnProperty("toString"));
+
+
+let fastCar = new Map();
+fastCar.set("speed", 88);
+
+console.log(`what is the speed of the car?`, fastCar.get("speed"));
+
+//*Polymorphism:
+Rabbit.prototype.toString = function(){
+  return `a ${this.type} rabbit`;
+};
+console.log(String(muteRabbit));
+
+//*Symbols: are valued created whith the symbol function. Unlike strings, newly created symbols are unique - you cannot create the same symbol twice.
+
+let sym = Symbol("name")
+console.log(sym == Symbol("name"));
+Rabbit.prototype[sym] = 55;
+console.log(muteRabbit[sym]);
+
+const toStringSymbol = Symbol("toString");
+Array.prototype[toStringSymbol] = function(){
+  return `${this.length} cm of blue yarn`;
+};
+console.log([1, 2].toString());
+console.log([1,2][toStringSymbol]());
+
+let stringObject = {
+  [toStringSymbol]() { return "a jute rope"; }
+  };
+console.log(stringObject[toStringSymbol]());
+
