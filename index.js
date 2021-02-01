@@ -739,3 +739,286 @@ let stringObject = {
   };
 console.log(stringObject[toStringSymbol]());
 
+
+//*The Iterator interface
+let okIterator = "OK"[Symbol.iterator]();
+console.log(okIterator.next());
+console.log(okIterator.next());
+console.log(okIterator.next());
+
+
+class Matrix {
+  constructor (width, height, element = (x, y) => undefined){
+    this.width = width;
+    this.height = height;
+    this.content = [];
+    
+    for(let y = 0; y < height; y++){
+      for(let x = 0; x < width; x++){
+        this.content[y * width + x] = element(x, y);
+      }
+    }
+  }
+
+get(x,y){
+  return this.content[y * this.width + x];
+}
+set(x,y, value){
+  this.content[y * this.width + x] = value;
+}
+
+}
+
+class MatrixIterator {
+  constructor(matrix) {
+  this.x = 0;
+  this.y = 0;
+  this.matrix = matrix;
+  }
+  next() {
+    if (this.y == this.matrix.height) return {done: true};
+    let value = { x: this.x,
+                  y: this.y,
+                  value: this.matrix.get(this.x, this.y)};
+    this.x++;
+  
+  if (this.x == this.matrix.width) {
+    this.x = 0;
+    this.y++;
+  }
+  return {value, done: false};
+}
+}
+
+
+Matrix.prototype[Symbol.iterator] = function() {
+  return new MatrixIterator(this);
+  }
+let matrix = new Matrix(2, 2, (x, y) => `value ${x},${y}`);
+for (let {x, y, value} of matrix) {
+console.log(x, y, value);
+}
+
+console.log('jacob mbogo');
+
+function isEven(number){
+ number = Math.abs(number);
+ if(number == 0) {
+   return true;
+ }else if(number == 1){
+   return false;
+ } else {
+   return isEven(number - 2);
+ }
+}
+
+console.log(isEven(-1));
+
+function countBs(string){
+  string = string.split('');
+  let bs = [];
+  for (let char of string){
+    if (char == "B"){
+      bs.push(char);
+    }
+  }
+  return bs.length;
+}
+
+console.log(countBs("BaBluenBAcodiB"));
+
+function countChar(string, k){
+  string = string.split('');
+  let os = [];
+  for (let char of string){
+    if(char == k){
+      os.push(char);
+    }
+  }
+  return os.length;
+}
+
+console.log(countChar("BakudiokalinaBKK", "K"));
+
+function reverseArray(array){
+  let newArr = [];
+  for (i = array.length - 1; i >= 0; i--){
+    newArr.push(array[i]);
+  }
+  return newArr;
+}
+
+console.log(reverseArray([1, 3, 5, 6]));
+
+function reverseArrayInPlace(arr){
+  return arr.reverse();
+}
+console.log(reverseArrayInPlace([1, 2, 7]));
+
+function arrayToLIst(array){
+  
+    return {value: array[0], rest: {value: array[1], rest: {value: array[2], rest: null}}};
+  
+}
+
+console.log(arrayToLIst([1,2,3]));
+
+function array(array){
+  return array.reduce((a,b) => a.concat(b));
+}
+console.log(array([[1,4,5],[6,5,"t"]]));
+
+
+//^Project: robot
+
+const roads = [
+  "Alice's House-Bob's House", "Alice's House-Cabin",
+  "Alice's House-Post Office", "Bob's House-Town Hall",
+  "Daria's House-Ernie's House", "Daria's House-Town Hall",
+  "Ernie's House-Grete's House", "Grete's House-Farm",
+  "Grete's House-Shop", "Marketplace-Farm",
+  "Marketplace-Post Office", "Marketplace-Shop",
+  "Marketplace-Town Hall", "Shop-Town Hall"
+];
+
+//* The network of roads in this village forms a graph. Of which a graph is a collection of points(places in the village) with lines between them( roads)
+
+//* The array of strings can be very difficult to work with. Let's convert the list of roads to a data structure that for each place tells us what can be reached from there.
+
+function buldGraph(edges){
+  let graph = Object.create(null);
+  function addEdge(from, to){
+    if(graph[from] == null){
+      graph[from] = [to];
+    } else {
+      graph[from].push(to);
+    }
+  }
+  for (let [from,to] of edges.map(r => r.split("-"))){
+  addEdge(from, to);
+  addEdge(to, from);
+  }
+  return graph;
+}
+
+const roadGraph = buldGraph(roads);
+console.log(roadGraph);
+
+
+//* The Task
+
+class VillageState {
+  constructor(place, parcels){
+    this.place = place;
+    this.parcels = parcels;
+  }
+  move(destination){
+    if (!roadGraph[this.place].includes(destination)){
+      return this;
+    } else {
+      let parcels = this.parcels.map(p => {
+        if(p.place != this.place) return p;
+        return {place: destination, address: p.address};
+      }).filter(p => p.place != p.address);
+      return new VillageState(destination, parcels);
+    }
+  }
+}
+
+let first = new VillageState(
+  "Post Office",
+  [{place: "Post Office", address: "Alice's House"}]
+);
+let next = first.move("Alice's House");
+
+console.log(next.place, next.parcels, first.place);
+
+let unchangable = Object.freeze({value: 5});//* Don't mess with this object
+unchangable.value = 10;
+console.log(unchangable.value);
+
+function runRobot(state, robot, memory){
+  for( let turn = 0;; turn ++){
+    if (state.parcels.length == 0){
+      console.log(`Done in ${turn} turns`);
+      break;
+    }
+    let action = robot(state, memory);
+    state = state.move(action.direction);
+    memory = action.memory;
+    console.log(`Moved to ${action.direction}`);
+  }
+}
+
+function randomPick(array){
+  let choice = Math.floor(Math.random()*array.length);
+  return array[choice];
+}
+
+function randomRobot(state){
+  return {direction: randomPick(roadGraph[state.place])};
+}
+
+VillageState.random = function(parcelCount = 5){
+  let parcels = [];
+  for (let i = 0; i < parcelCount; i++){
+    let address = randomPick(Object.keys(roadGraph));
+    let place;
+    do{
+      place = randomPick(Object.keys(roadGraph));
+    } while (place == address);
+    parcels.push({place, address});
+  }
+  return new VillageState("Post Office", parcels);
+};
+//* Starting up a virtual world.
+runRobot(VillageState.random(), randomRobot);
+
+
+//* The Mail Truck's Route
+const mailRoute = [//*starting from the post office
+  "Alice's House", "Cabin", "Alice's House", "Bob's House",
+  "Town Hall", "Daria's House", "Ernie's House",
+  "Grete's House", "Shop", "Grete's House", "Farm",
+  "Marketplace", "Post Office"
+];
+
+
+function routeRobot(state, memory){
+  if (memory.length == 0){
+    memory = mailRoute;
+  }
+  return { direction: memory[0], memory: memory.slice(1)};
+}
+
+//* Pathfinding
+
+function findRoute(graph, from, to){
+  let work = [{at: from, route: []}];
+  for (let i = 0; i < work.length; i++){
+    let {at, route} = work[i];
+    for ( let place of graph[at]){
+      if (place == to) return route. concat(place);
+      if (!work.some(w => w.at == place)){
+        work.push({at: place, route: route.concat(place)});
+      }
+    }
+  }
+}
+
+function goalOrientedRobot({place, parcels}, route){
+  if(route.length == 0){
+    let parcel = parcels[0];
+    if (parcel.place){
+      route = findRoute(roadGraph, place, parcel.place);
+    } else {
+      route = findRoute(roadGraph, place, parcel.address);
+    }
+  }
+  return {direction: route[0], memory: route.slice(1)};
+}
+
+let bminus = [3,6,7,4];
+bminus.unshift(3);
+console.log(bminus);
+
