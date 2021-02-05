@@ -1156,8 +1156,133 @@ function factorial(x) {
   let f;
   for(f = 1; x > 1; f *= x, x--) /* empty */ ;
   return f;
+  
+}
+console.log(factorial(4));// => 24
 
-  
-  
+let quoteSample = "Beware of bugs in the above code; I have only proved it correct, not tried it.";
+let vowelRegex = /[aeiou]+/gi; // Change this line
+let result = quoteSample.match(vowelRegex); // Change this line
+console.clear();
+console.log(result);
+
+
+function reverseString(str) {
+  let newStr = str.split("").reverse().join("");
+  return newStr;
+}
+
+console.log(reverseString("hello"));
+
+function factorialize(num) {
+  if (num < 1){
+    return 1
+  } else {
+    num = num * factorialize(num -1);
   }
-  console.log(factorial(4));// => 24
+  return num;
+}
+console.log(factorialize(0));
+
+function findLongestWordLength(str) {
+  let string = str.split(" ");
+  let array = [];
+  for (let element of string){
+    array.push(element.length)
+  }
+  return Math.max(...array);
+
+}
+console.log(findLongestWordLength("The quick brown fox jumped over the lazy dog"));
+
+function largestOfFour(arr) {
+  let largest = [];
+  for(let i = 0; i < arr.length; i++){
+      let max =  arr[i].reduce((a,b) => Math.max(a,b));
+      largest.push(max);
+  }
+  return largest;
+}
+
+console.log(largestOfFour([[4, 5, 1, 3], [13, 27, 18, 26], [32, 35, 37, 39], [1000, 1001, 857, 1]]));
+
+
+
+function confirmEnding(str, target) {
+  let index = str.lastIndexOf(target);
+  if(index == str.length - 1){
+    return true;
+  }
+  return false;
+}
+
+confirmEnding("Bastian", "n");
+
+
+console.log(confirmEnding("Bastian", "ian"));
+
+let namaste = "jacob mbogo ogot";
+console.log(namaste.length - 1);
+console.log(namaste.indexOf("ob"));
+
+function repeatStringNumTimes(str, num) {
+  if(num < 0){
+    return "";
+  } else {
+    let array = [];
+    for (let i = 0; i < num; i++){
+      array.push(str);
+    }
+    return array.reduce((a,b) => a + b);
+  }
+}
+
+console.log(repeatStringNumTimes("*", 8));
+
+function truncateString(str, num) {
+  if (str.length > num){
+    return str[0] + "...";
+  } else 
+  return str;
+}
+
+console.log(truncateString("A-tisket a-tasket A green and yellow basket", 8));
+
+function findElement(arr, func) {
+  let num = 0;
+  for (let element of arr){
+    if(func(element)){
+      num = num + element;
+      return num;
+    }
+  }
+}
+
+console.log(findElement([1, 2, 3, 4], num => num % 2 === 0));
+
+function booWho(bool) {
+  if (bool === true || bool === false){
+    return true;
+  }
+  else {
+    return false;
+  }
+}
+
+console.log(booWho(NaN));
+
+function titleCase(str) {
+  str = str.toLowerCase();
+  let string = str.split(' ');
+  string = string.map(a => a[0].toUpperCase() + a.slice(1));
+ return string.join(' ')
+}
+console.log(titleCase("I'm a little tea pot"));
+
+
+function frankenSplice(arr1, arr2, n) {
+  arr2.splice(n,0,...arr1)
+  return arr2;
+}
+
+console.log(frankenSplice([1, 2, 3], [4, 5], 1));
