@@ -1281,8 +1281,68 @@ console.log(titleCase("I'm a little tea pot"));
 
 
 function frankenSplice(arr1, arr2, n) {
-  arr2.splice(n,0,...arr1)
-  return arr2;
+ 
+  const arr3 = [...arr2];
+  arr3.splice(n,0,...arr1);
+  console.log(arr2);
+  return arr3;
+  
+}
+// *returns [4, 1, 2, 3, 5];
+console.log(frankenSplice([1, 2, 3], [4, 5], 1));
+
+let newbie = [4, 1, 2, 3, 5];
+console.log(newbie.slice(1,4));
+
+function bouncer(arr) {
+  let truthy = [];
+  for(let element of arr){
+    let check = Boolean(element);
+    if(check === true){
+      truthy.push(element);
+    }
+  }
+  return truthy;
 }
 
-console.log(frankenSplice([1, 2, 3], [4, 5], 1));
+console.log(bouncer([false, null, 0, NaN, undefined, ""]));
+
+function getIndexToIns(arr, num) {
+  arr = arr.sort((a,b) => a - b);
+  console.log(arr);
+  let newArray = [];
+  for(let element of arr){
+    if (num > element){
+      newArray.push(element);
+    }
+  }
+  newArray.push(num);
+  return newArray.indexOf(num);
+}
+
+console.log(getIndexToIns([10, 20, 30, 40, 50], 30));
+
+function mutation(arr) {
+  for(let element of arr[1].toLowerCase()){
+    if(!arr[0].toLowerCase().includes(element)){
+      return false;
+    }
+  }
+  return true;
+}
+
+console.log(mutation(["hello", "neo"]));
+
+function chunkArrayInGroups(arr, size) {
+  let newArray = [];
+  while(arr.length){
+    newArray.push(arr.slice(0, size));
+  }
+ return newArray;
+}
+
+console.log(chunkArrayInGroups(["a", "b", "c", "d"], 2));
+
+
+
+
