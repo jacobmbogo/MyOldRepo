@@ -1,7 +1,7 @@
 console.log("Hello World!");
 let sumTotal = 0;
 function all(array){
-  for(i = 0; i<array.length; i++){
+  for(let i = 0; i<array.length; i++){
     sumTotal = sumTotal + array[i];
   }
 }
@@ -11,7 +11,7 @@ console.log(sumTotal);
 function reverseArray(array){
 
   let niceArray = [];
-  for(i=array.length-1; i>=0; i--){
+  for(let i=array.length-1; i>=0; i--){
     niceArray.push(array[i]);
 
   }
@@ -80,7 +80,7 @@ function showScope(){
   return scope;
 
 }
-scope = "global";
+let scope = "global";
 console.log(scope);
 console.log(showScope());
 console.log(scope);
@@ -123,7 +123,7 @@ let numbers = new Array(2,3,4,5,6);
 console.log(numbers);
 
 let nums = [];
-for(i = 0; i < 6; i++){
+for(let i = 0; i < 6; i++){
   nums[i]= i + 1;
 }
 console.log(nums);
@@ -196,7 +196,7 @@ function unless(test, then) {
   const arr1 = [1,2,3];
   const arr2 = [];
 
-  for (i = 0; i < arr1.length; i++){
+  for (let i = 0; i < arr1.length; i++){
     arr2.push(arr1[i]*2);
   }
   console.log(arr2);
@@ -275,7 +275,7 @@ function unless(test, then) {
 
  
   let list = []
-  for (i = 0; i < 20; i++){
+  for (let i = 0; i < 20; i++){
       list[i] = i+1;
   }
 
@@ -292,7 +292,7 @@ function unless(test, then) {
 
 
   let people = [1,4,5,6,6];
-  peopleInTotal = people.reduce((currentNumber,totalNumber) => currentNumber + totalNumber);
+  let peopleInTotal = people.reduce((currentNumber,totalNumber) => currentNumber + totalNumber);
 
   console.log(peopleInTotal);
   var itDiv = ["Mike","Clayton","Terrill","Raymond","Cynthia","Danny","Jennifer"];
@@ -301,7 +301,7 @@ function unless(test, then) {
   console.log(itDiv);
 
   let numberList = [1,3,5];
-  evenNumbers = numberList.some(even => even % 2 == 0);
+  let evenNumbers = numberList.some(even => even % 2 == 0);
   console.log(evenNumbers);
 
   let horseShoe = "🐴👟";
@@ -840,15 +840,6 @@ function countChar(string, k){
 
 console.log(countChar("BakudiokalinaBKK", "K"));
 
-function reverseArray(array){
-  let newArr = [];
-  for (i = array.length - 1; i >= 0; i--){
-    newArr.push(array[i]);
-  }
-  return newArr;
-}
-
-console.log(reverseArray([1, 3, 5, 6]));
 
 function reverseArrayInPlace(arr){
   return arr.reverse();
@@ -934,7 +925,6 @@ let next = first.move("Alice's House");
 console.log(next.place, next.parcels, first.place);
 
 let unchangable = Object.freeze({value: 5});//* Don't mess with this object
-unchangable.value = 10;
 console.log(unchangable.value);
 
 function runRobot(state, robot, memory){
@@ -1148,17 +1138,6 @@ for(;;){
 
 
 //* Assertions
-function factorial(x) {
-  // If the input argument is invalid, throw an exception!
-  if (x < 0) throw new Error("x must not be negative");
-
-  // Otherwise, compute a value and return normally
-  let f;
-  for(f = 1; x > 1; f *= x, x--) /* empty */ ;
-  return f;
-  
-}
-console.log(factorial(4));// => 24
 
 let quoteSample = "Beware of bugs in the above code; I have only proved it correct, not tried it.";
 let vowelRegex = /[aeiou]+/gi; // Change this line
@@ -1391,7 +1370,15 @@ const evalAndReturnX = (code) => {
 }
 console.log(evalAndReturnX("var x = 2"));
 console.log(x);
-const {named} = {named: "jacob"};
-console.log(named);
+
 
 //*Modules with Classes, Object and closures.
+
+import {display, Name} from "./module.js";
+
+console.log(display("Orange"));
+
+let myName = new Name("Tony", "Cruz");
+console.log(myName.combineNames());
+
+console.log(display("noon"));
