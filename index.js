@@ -1333,16 +1333,65 @@ function mutation(arr) {
 
 console.log(mutation(["hello", "neo"]));
 
-function chunkArrayInGroups(arr, size) {
-  let newArray = [];
-  while(arr.length){
-    newArray.push(arr.slice(0, size));
-  }
- return newArray;
+
+
+let matchtest = /jacob/gi.exec(" 0 1 jacob");
+
+console.log(matchtest);
+
+console.log(/bad(ly)?/.exec("bad"));
+console.log(/bad[ly]?/.exec("bad"));
+
+//*The Date Class
+console.log(new Date());
+console.log(new Date().getTime());
+console.log(new Date(1613408920625), Date.now());
+console.log(Date.now());
+console.log(new Date().getFullYear());
+
+
+const getDate = (string) => {
+  let [_, month, day, year] = /(\d{1,2})-(\d{1,2})-(\d{4})/.exec(string);
+  return new Date(year, month - 1, day);
 }
+console.log(getDate("1-30-2003"));
 
-console.log(chunkArrayInGroups(["a", "b", "c", "d"], 2));
+let stringe = "1-30-2003";
+console.log(/(\d{1,2})-(\d{1,2})-(\d{4})/.exec(stringe));
+
+console.log(/\bcat\b/.test("cat!!"));
+
+let animalCount = /\b\d+\s+(pig|cow|chicken)s?\b/;
+console.log(animalCount.test("15 pigs"));
 
 
+console.log(/ca(r|t)/.test("car"));
+console.log(/pr?op/.test("pop"));
+console.log(/ferr(\w+)/.test("ferret"));
+console.log(/\w+ious$/.test("falasious"));
+console.log(/\s\.,(:|;)/.test(" .,:"));
+console.log(/\w{6,}/.test("triangular"));
+console.log("elephant".match(/[e]/g));
 
+//*Chapter 10: Modules.
+const weekDay = (() => {
+  const names = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
+  return {
+    name(number) {return names[number]; }, 
+    number(name) {return names.indexOf(name);}
+  };
+})();
 
+console.log(weekDay.name(weekDay.number("Sunday")));
+
+const x = 1;
+const evalAndReturnX = (code) => {
+  eval(code);
+  return x;
+}
+console.log(evalAndReturnX("var x = 2"));
+console.log(x);
+const {named} = {named: "jacob"};
+console.log(named);
+
+//*Modules with Classes, Object and closures.
