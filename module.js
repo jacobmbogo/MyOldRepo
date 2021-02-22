@@ -1,8 +1,8 @@
-function display(name){
+export function display(name){
     return name;
 };
 
-class Name {
+export default class Name {
     constructor(firstName, secondName){
         this.firstName = firstName;
         this.secondName = secondName;
@@ -11,5 +11,3 @@ class Name {
         return this.firstName + " " + this.secondName;
     }
 };
-
-export {display, Name};

@@ -1374,11 +1374,36 @@ console.log(x);
 
 //*Modules with Classes, Object and closures.
 
-import {display, Name} from "./module.js";
+import{default as Name, display, display as otherName} from "./module.js";
 
-console.log(display("Orange"));
+// console.log(display("Orange"));
 
 let myName = new Name("Tony", "Cruz");
 console.log(myName.combineNames());
 
-console.log(display("noon"));
+// console.log(display("noon"));
+
+// console.log(functions.display("Ogot"));
+// let myName = new functions.Name("Tim", "Jonah");
+// console.log(myName.combineNames());
+// console.log(functions);
+
+console.log(otherName("main"));
+//*Asynchronus programming
+// setTimeout(() => console.log("Tick"));
+
+
+let fifteen = Promise.resolve(15);
+fifteen.then(answer => console.log(`We got ${answer}`));
+
+
+// function indexOf(words, target){ 
+//   let regex = new RegExp("\b"+target+"\b", "gi");
+//   let wordstring = words.join(" ");
+//   console.log(wordstring);
+// };
+  
+// console.log(indexOf(['JaCk', 'Jack', 'jack', 'jackk', 'COdewars', 'codeWars', 'abcdefgh', 'codewars'],'codewars'));
+let abby = ["jane","pita", "cuba"];
+let regex = /cuba/gi;
+console.log(regex.exec(abby));
