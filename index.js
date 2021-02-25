@@ -1409,35 +1409,88 @@ let regex = /cuba/gi;
 console.log(regex.exec(abby));
 
 
-const getTodos = (resource) => {
-  return new Promise((resolve, reject) => {
-    const request = new XMLHttpRequest();
+// const getTodos = (resource) => {
+//   return new Promise((resolve, reject) => {
+//     const request = new XMLHttpRequest();
 
-    request.addEventListener("readystatechange", () => {
-      // console.log(request, request.readyState);
-      if(request.readyState === 4 && request.status === 200){
-        const data = JSON.parse(request.responseText);
-        resolve(data);
-      } else if( request.readyState === 4){
-        reject("error getting results");
-      }
-    })
+//     request.addEventListener("readystatechange", () => {
+//       // console.log(request, request.readyState);
+//       if(request.readyState === 4 && request.status === 200){
+//         const data = JSON.parse(request.responseText);
+//         resolve(data);
+//       } else if( request.readyState === 4){
+//         reject("error getting results");
+//       }
+//     })
 
-    request.open("GET", resource);
-    request.send();
+//     request.open("GET", resource);
+//     request.send();
 
 
- })
+//  })
+// };
+
+// getTodos("todos/luigi.json").then(data => {
+//   console.log("promise resolved:" ,data);
+//   return getTodos("todos/mario.json");
+// }).then(data => {
+//   console.log("promise 2 resolved:",data);
+//   return getTodos("todos/ogot.json");
+// }).then(data => {
+//   console.log("promise 3 resolved:", data);
+// }).catch(err => {
+//   console.log("promise rejected:", err);
+// });
+
+
+//*The Fetch Api
+// fetch("todos/luigi.json").then((response) => {
+//   console.log("resolved", response);
+//   return response.json();
+// }).then((data) => {
+//   console.log(data);
+// }).catch((err) => {
+//   console.log("rejected", err);
+// });
+
+// fetch("todos/ogot.json")
+// .then(response => {
+//   if(!response.ok){
+//     return null;
+//   }
+//   let type = response.headers.get("content-type");
+//   if (type !== "application/json"){
+//     throw new TypeError( `Expected JSON, got ${type}`);
+//     return response.json();
+//   }
+// })
+// .then(data => {
+//     console.log(data);
+// })
+// .catch(e => {
+//   console.log("failed to retrieve data:", e);
+// })
+
+const urls = ["todos/ogot.json", "todos/mario.json"];
+let promises = urls.map(url => fetch(url).then(response => response.json()));
+Promise.allSettled(promises)
+.then(data => {
+  console.log(data);
+})
+.catch(err => {
+  console.error("not resolved:",err);
+})
+
+const getTodos = async () => {
+  const response = await fetch("todos/luigi.json");
+
+  if (response.status !== 200){
+    throw new Error("Cannot fetch the data");
+  }
+  const data = await response.json();
+  return data;
 };
 
-getTodos("todos/luigi.json").then(data => {
-  console.log("promise resolved:" ,data);
-  return getTodos("todos/mario.json");
-}).then(data => {
-  console.log("promise 2 resolved:",data);
-  return getTodos("todos/ogot.json");
-}).then(data => {
-  console.log("promise 3 resolved:", data);
-}).catch(err => {
-  console.log("promise rejected:", err);
-})
+getTodos()
+  .then(data => console.log("resolved:", data))
+  .catch(err => console.log("not resolved:", err.message));
