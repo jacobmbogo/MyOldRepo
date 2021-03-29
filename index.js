@@ -1828,3 +1828,98 @@ console.log(translatePigLatin("schwartz"));
 //   }
 //   return expr;
 // }
+//? Browser: part 2
+
+function doubleton(num) {
+  // let number = new Set(String(num));
+
+  // let [a, b, ...rest] = number;
+  // for (let element of rest) {
+  //   if (![a, b].includes(element)) {
+  //     num = num + 1;
+  //     doubleton(num);
+  //   }
+  // }
+  // return num;
+  while (true) {
+    num++;
+    if (new Set(String(num)).size === 2) {
+      return num;
+    }
+  }
+}
+console.log(doubleton(10));
+
+function pairElement(str) {
+  let newString = str.split("");
+  let fullArray = [];
+  for (let element of newString) {
+    if (element == "A") {
+      let newArray = [];
+      newArray.push(element, "T");
+      fullArray.push(newArray);
+    } else if (element == "T") {
+      let secondArray = [];
+      secondArray.push(element, "A");
+      fullArray.push(secondArray);
+    } else if (element == "C") {
+      let thirdArray = [];
+      thirdArray.push(element, "G");
+      fullArray.push(thirdArray);
+    } else {
+      let fourthArray = [];
+      fourthArray.push(element, "C");
+      fullArray.push(fourthArray);
+    }
+  }
+  return fullArray;
+}
+
+console.log(pairElement("ATCGA"));
+
+let word = "abcdefghijklmnopqrstuvwxyz";
+let regexed = new RegExp("a" + "(\\w+)?" +"m" , "g");
+console.log(word.match(regexed));
+
+
+function fearNotLetter(str) {
+  let defaultLetters = "abcdefghijklmnopqrstuvwxyz";
+  let newString = str.split("");
+  let firstletter = newString[0];
+  let lastletter = newString[str.length - 1];
+  let regex = new RegExp(firstletter + "(\\w+)?" + lastletter, "g");
+  let  matchedLetters = defaultLetters.match(regex);
+  matchedLetters = matchedLetters[0].split("");
+  let unmatchedLetter =  matchedLetters.filter(letter => !str.includes(letter));
+  return unmatchedLetter[0];
+}
+
+console.log(fearNotLetter("stvwx"));
+
+function uniteUnique(a, ...rest) {
+  rest = [].concat.apply([],rest);
+  for (let element of rest){
+    if(!a.includes(element)){
+      a.push(element);
+    }
+  }
+  return a;
+}
+
+console.log(uniteUnique([1, 3, 2], [5, 2, 1, 4], [2, 1]));
+
+function convertHTML(str) {
+  let matches = {
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    "'": "&apos;",
+    '"': "&quot;"
+  }
+
+ return str.replace(/[&<>'"]/g, match => match = matches[match]);
+ 
+}
+
+console.log(convertHTML('<>'));
+
